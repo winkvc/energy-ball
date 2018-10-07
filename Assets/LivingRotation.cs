@@ -6,8 +6,14 @@ public class LivingRotation : MonoBehaviour {
 
 	Quaternion[] rotations;
 
-	int LOOP_DURATION = 30; // frames
+	int loopDuration; // frames
 	int ROTATIONS_LENGTH = 3; // kinds of rotations.
+	int framesUntilNewLoop = 0;
+
+	void SetLoopDuration () {
+		loopDuration = (int)(Random.value * 20) + 15;
+		framesUntilNewLoop = loopDuration;
+	}
 
 	// Use this for initialization
 	void Start () {
@@ -15,12 +21,16 @@ public class LivingRotation : MonoBehaviour {
 		for (int i = 0; i < ROTATIONS_LENGTH; i++) {
 			rotations [i] = Random.rotationUniform;
 		}
+		SetLoopDuration ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		// where are we in the loop?
-		int frameInLoop = Time.frameCount % LOOP_DURATION;
+		if (framesUntilNewLoop == 0) {
+			SetLoopDuration();
+		}
+		int frameInLoop = loopDuration - framesUntilNewLoop;
 
 		// maybe get a new goal rotation and shift the rest down.
 		if (frameInLoop == 0) {
@@ -34,17 +44,12 @@ public class LivingRotation : MonoBehaviour {
 		}
 
 		// calculate how to interpolate.
-		float progressInLoop = frameInLoop / (float)LOOP_DURATION;
+		float progressInLoop = frameInLoop / (float)loopDuration;
 		float[] weight = new float[ROTATIONS_LENGTH];
 		float loopsToRadians = Mathf.PI / (ROTATIONS_LENGTH - 1);
 		for (int i = 0; i < ROTATIONS_LENGTH; i++) {
-			// note this does not normalize to 1.
-			// That's all taken care of by the next step.
-			weight[i] = Mathf.Cos(Mathf.Max(0, ROTATIONS_LENGTH - i - progressInLoop - 1) * loopsToRadians) - 
-				Mathf.Cos(Mathf.Min(ROTATIONS_LENGTH - i - progressInLoop, ROTATIONS_LENGTH - 1) * loopsToRadians);
-
-			//Debug.Log (i + " " + weight [i]);
-
+			float t = (i + progressInLoop) / ROTATIONS_LENGTH;
+			weight [i] = 3 * (1 - t) * t * t * 0.3f;
 		}
 
 		// now actually "interpolate"
@@ -52,10 +57,12 @@ public class LivingRotation : MonoBehaviour {
 			transform.rotation = Quaternion.Slerp(
 				transform.rotation,
 				rotations[i],
-				weight[i] / ((ROTATIONS_LENGTH - 1) * LOOP_DURATION)
+				weight[i]
 			);
-			Debug.Log ("weight is: " + weight[i] / LOOP_DURATION);
+			//Debug.Log ("weight is: " + weight[i] / LOOP_DURATION);
 		}
+
+		framesUntilNewLoop--;
 
 	}
 }
