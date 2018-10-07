@@ -29,7 +29,7 @@ public class LivingRotation : MonoBehaviour {
 			}
 			rotations[0] = Random.rotationUniform;
 			for (int i = 0; i < ROTATIONS_LENGTH; i++) {
-				Debug.Log (i + " " + rotations [i]);
+				//Debug.Log (i + " " + rotations [i]);
 			}
 		}
 
@@ -47,21 +47,15 @@ public class LivingRotation : MonoBehaviour {
 
 		}
 
-		// now actually interpolate
-		float accumulatedWeight = weight[0];
-		Quaternion accumulatedRotation = rotations[0];
-
-		for (int i = 1; i < ROTATIONS_LENGTH; i++) {
-			float sumWeight = accumulatedWeight + weight[i];
-			accumulatedRotation = Quaternion.Slerp(
-				accumulatedRotation,
-				rotations[i], 
-				1 - accumulatedWeight / sumWeight
+		// now actually "interpolate"
+		for (int i = ROTATIONS_LENGTH - 1; i > 0; i--) {
+			transform.rotation = Quaternion.Slerp(
+				transform.rotation,
+				rotations[i],
+				weight[i] / ((ROTATIONS_LENGTH - 1) * LOOP_DURATION)
 			);
-			Debug.Log ("weight is: " + accumulatedWeight / sumWeight);
-			accumulatedWeight = sumWeight;
+			Debug.Log ("weight is: " + weight[i] / LOOP_DURATION);
 		}
-		transform.rotation = accumulatedRotation;
 
 	}
 }
