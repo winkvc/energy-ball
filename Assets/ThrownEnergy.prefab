@@ -23,9 +23,11 @@ GameObject:
   - component: {fileID: 23702228682868488}
   - component: {fileID: 135052369093489702}
   - component: {fileID: 54453898676027618}
+  - component: {fileID: 114732195511030908}
+  - component: {fileID: 114153012916216258}
   m_Layer: 0
   m_Name: ThrownEnergy
-  m_TagString: Untagged
+  m_TagString: ScreenPhysical
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -37,7 +39,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1642137350198226}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 8.57605, y: -0.20169935, z: 1.6622121}
   m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
   m_Children: []
   m_Father: {fileID: 0}
@@ -58,7 +60,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: bd128e432dbb141968ebf58aff703268, type: 2}
+  - {fileID: 2100000, guid: 352f099901f85401789985d67ae8060c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -100,6 +102,29 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 1
+--- !u!114 &114153012916216258
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1642137350198226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 387e6590c932a4bfd98579d24db68811, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasRebounded: 0
+--- !u!114 &114732195511030908
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1642137350198226}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b55668af8cf44304add8856d15b96a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!135 &135052369093489702
 SphereCollider:
   m_ObjectHideFlags: 1

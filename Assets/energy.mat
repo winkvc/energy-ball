@@ -8,8 +8,8 @@ Material:
   m_PrefabInternal: {fileID: 0}
   m_Name: energy
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: _EMISSION
-  m_LightmapFlags: 1
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -60,9 +60,9 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _GlossMapScale: 1
-    - _Glossiness: 0.658
+    - _Glossiness: 0.409
     - _GlossyReflections: 1
-    - _Metallic: 0.46
+    - _Metallic: 0.768
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
@@ -72,5 +72,5 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0.4245283, g: 0.26132593, b: 0.13616945, a: 1}
-    - _EmissionColor: {r: 0.50694185, g: 0.5793621, b: 0.03379612, a: 1}
+    - _Color: {r: 1, g: 0.5, b: 0, a: 1}
+    - _EmissionColor: {r: 0.46666667, g: 0, b: 0, a: 1}
