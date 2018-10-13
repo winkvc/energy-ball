@@ -37,7 +37,6 @@ GameObject:
   - component: {fileID: 4670831458564470}
   - component: {fileID: 33127369337693676}
   - component: {fileID: 23752918388093764}
-  - component: {fileID: 135839297398685702}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -215,15 +214,3 @@ TrailRenderer:
   m_MinVertexDistance: 0.01
   m_Autodestruct: 0
   m_Emitting: 1
---- !u!135 &135839297398685702
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1758450616565756}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
