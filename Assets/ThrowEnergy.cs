@@ -17,7 +17,6 @@ public class ThrowEnergy : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (Time.frameCount % 200 == 0) {
-			Debug.Log ("Creating new ball");
 			GameObject newProjectile = Instantiate(projectile, transform.position, Quaternion.identity);
 
 			Vector3 offset = target.transform.position - this.transform.position;
@@ -31,7 +30,6 @@ public class ThrowEnergy : MonoBehaviour {
 	void OnTriggerEnter(Collider collider) {
 		GameObject other = collider.gameObject;
 		if (other.CompareTag ("ScreenPhysical") && other.GetComponent<ReboundFlag>().hasRebounded) {
-			Debug.Log ("Absorbing new energy");
 			GetComponent<HealthManager>().health += 0.1f * other.GetComponent<Rigidbody> ().velocity.magnitude;
 			Destroy (other);
 		}

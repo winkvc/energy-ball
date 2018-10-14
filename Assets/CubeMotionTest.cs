@@ -25,9 +25,6 @@ public class CubeMotionTest : MonoBehaviour {
 		// change position (simulate position-setting that ARCore does)
 		//SwingPosition ();
 
-		// calculate velocity, classic dx/dt way
-		//Debug.Log("position is " + transform.position.z.ToString() + " and old position is " + positions [0].z.ToString());
-		//Debug.Log("diff in time" + (Time.time - times[0]).ToString());
 		measuredVelocity = (transform.position - positions [0]) / (Time.time - times[0]);
 
 		// slide everything over
@@ -55,17 +52,13 @@ public class CubeMotionTest : MonoBehaviour {
 		if (other.CompareTag("ScreenPhysical")) {
 			// do some math.. ya ready?
 			Vector3 otherVelocity = other.GetComponent<Rigidbody>().velocity;
-			Debug.Log ("measuredVelocity is" + measuredVelocity.ToString("F3"));
-			Debug.Log ("otherVelocity is" + otherVelocity.ToString("F3"));
 
 			// first, take the other's velocity and subtract the screenproxy velocity.
 			// This is so that the velocity we're working with is relative to the screenproxy.
 			Vector3 relativeVelocity = otherVelocity - measuredVelocity;
-			Debug.Log ("relativeVelocity is" + relativeVelocity.ToString("F3"));
 
 			// then, rotate the velocity into the screenproxy's coordinate frame, such that if 
 			Vector3 transformedVelocity = Quaternion.Inverse(transform.rotation) * relativeVelocity;
-			Debug.Log ("transformedVelocity is" + transformedVelocity.ToString("F3"));
 
 			// negate the direction along the axis facing outward [+z, prolly]
 			if (transformedVelocity.z < 0) {
@@ -73,15 +66,12 @@ public class CubeMotionTest : MonoBehaviour {
 				other.GetComponent<ReboundFlag> ().hasRebounded = true;
 				thump.Play ();
 			}
-			Debug.Log ("transformedVelocity is" + transformedVelocity.ToString("F3"));
 
 			// rotate back into worldspace
 			relativeVelocity = transform.rotation * transformedVelocity;
-			Debug.Log ("relativeVelocity is" + relativeVelocity.ToString("F3"));
 
 			// add back the screenproxy velocity.
 			otherVelocity = relativeVelocity + measuredVelocity;
-			Debug.Log ("otherVelocity is" + otherVelocity.ToString("F3"));
 			other.GetComponent<Rigidbody> ().velocity = otherVelocity;
 		}
 	}
