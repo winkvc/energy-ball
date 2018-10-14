@@ -8,6 +8,7 @@ public class CubeMotionTest : MonoBehaviour {
 	private float[] times;
 	private int lowPassFrameRate = 3;
 	private Vector3 measuredVelocity;
+	public AudioSource thump;
 
 	// Use this for initialization
 	void Start () {
@@ -70,6 +71,7 @@ public class CubeMotionTest : MonoBehaviour {
 			if (transformedVelocity.z < 0) {
 				transformedVelocity.z *= -1;
 				other.GetComponent<ReboundFlag> ().hasRebounded = true;
+				thump.Play ();
 			}
 			Debug.Log ("transformedVelocity is" + transformedVelocity.ToString("F3"));
 
